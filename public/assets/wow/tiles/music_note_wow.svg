@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Music note tile">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a116f"/><stop offset="0.58" stop-color="#19052d"/><stop offset="1" stop-color="#07020d"/></linearGradient>
+    <linearGradient id="note" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7af5"/><stop offset="0.55" stop-color="#c94cff"/><stop offset="1" stop-color="#6f38ff"/></linearGradient>
+    <filter id="glow" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect x="5" y="5" width="118" height="118" rx="24" fill="url(#bg)" stroke="#ff4fd8" stroke-width="4"/>
+  <rect x="11" y="11" width="106" height="106" rx="19" fill="none" stroke="#b76cff" stroke-opacity="0.4" stroke-width="2"/>
+  <path d="M75 25 v52.5 c0 12.5-11.5 22.5-25 22.5-11 0-20-6.5-20-15 0-9.5 10.5-16.5 23-16.5 5 0 9.5 1.1 13 3.1V36l34-8v16l-25 6z" fill="url(#note)" stroke="#fff0ff" stroke-width="4" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M37 37 h21" stroke="#35e4ff" stroke-width="5" stroke-linecap="round" opacity="0.75"/>
+  <path d="M29 48 h16" stroke="#ffe47a" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
+  <path d="M87 83 h14" stroke="#35e4ff" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+</svg>
