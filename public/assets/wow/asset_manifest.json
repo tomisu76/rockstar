@@ -1,0 +1,37 @@
+{
+  "packName": "Rockstar Visual Wow Asset Pack v1",
+  "branch": "assets-wow-v1",
+  "style": "concert arcade, neon purple, pink, cyan, gold, mobile-readable",
+  "status": "integration-ready SVG draft assets",
+  "notes": [
+    "Use these assets as a first visual direction, not final commercial art.",
+    "Do not reintroduce Toy Box, voxel rendering, Three.js, or Gemini asset generation.",
+    "Prefer Phaser image sprites loaded from SVG files with fallback vector shapes kept in code."
+  ],
+  "tiles": {
+    "gold_record": "public/assets/wow/tiles/gold_record_wow.svg",
+    "silver_record": "public/assets/wow/tiles/silver_record_wow.svg",
+    "music_note": "public/assets/wow/tiles/music_note_wow.svg",
+    "spotlight": "public/assets/wow/tiles/spotlight_wow.svg",
+    "speaker": "public/assets/wow/tiles/speaker_wow.svg"
+  },
+  "powerups": {
+    "microphone_blast": "public/assets/wow/powerups/microphone_blast_wow.svg",
+    "spotlight_burst": "public/assets/wow/powerups/spotlight_burst_wow.svg",
+    "stage_explosion": "public/assets/wow/powerups/stage_explosion_wow.svg"
+  },
+  "stage": {
+    "stage_header": "public/assets/wow/stage/stage_header_concert_wow.svg",
+    "crowd_strip": "public/assets/wow/stage/crowd_strip_wow.svg"
+  },
+  "ui": {
+    "neon_frame": "public/assets/wow/ui/neon_frame_wow.svg"
+  },
+  "recommendedNextAssets": [
+    "star_wow.svg",
+    "superstar_power_wow.svg",
+    "crowd_energy_meter_wow.svg",
+    "win_encore_panel_wow.svg",
+    "hud_panel_wow.svg"
+  ]
+}
