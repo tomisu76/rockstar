@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="beamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <polygon points="32,8 8,56 56,56" fill="url(#beamGrad)"/>
+  <path d="M24,8 L40,8 L36,18 L28,18 Z" fill="#37474f"/>
+  <ellipse cx="32" cy="18" rx="4" ry="2" fill="#fff"/>
+</svg>

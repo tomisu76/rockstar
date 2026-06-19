@@ -1,0 +1,46 @@
+{
+  "tileTypes": [
+    {
+      "id": "gold_record",
+      "label": "Gold Record",
+      "purpose": "main collect objective",
+      "shape": "circle",
+      "iconSuggestion": "gold vinyl record"
+    },
+    {
+      "id": "silver_record",
+      "label": "Silver Record",
+      "purpose": "secondary tile",
+      "shape": "circle",
+      "iconSuggestion": "silver vinyl record"
+    },
+    {
+      "id": "music_note",
+      "label": "Music Note",
+      "purpose": "standard tile",
+      "shape": "simple note",
+      "iconSuggestion": "eighth note"
+    },
+    {
+      "id": "star",
+      "label": "Star",
+      "purpose": "standard tile",
+      "shape": "star",
+      "iconSuggestion": "stage star"
+    },
+    {
+      "id": "spotlight",
+      "label": "Spotlight",
+      "purpose": "standard tile",
+      "shape": "light cone or lamp",
+      "iconSuggestion": "spotlight beam"
+    },
+    {
+      "id": "speaker",
+      "label": "Speaker",
+      "purpose": "standard tile",
+      "shape": "rounded square",
+      "iconSuggestion": "speaker icon"
+    }
+  ]
+}

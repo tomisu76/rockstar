@@ -1,0 +1,43 @@
+{
+  "id": "level_001_school_talent_show",
+  "name": "School Talent Show",
+  "board": {
+    "rows": 8,
+    "columns": 8,
+    "tileTypes": [
+      "gold_record",
+      "silver_record",
+      "music_note",
+      "star",
+      "spotlight",
+      "speaker"
+    ]
+  },
+  "moves": 28,
+  "objectives": [
+    {
+      "type": "collect",
+      "tile": "gold_record",
+      "target": 10
+    }
+  ],
+  "crowdEnergy": {
+    "targetPercent": 70,
+    "match3Gain": 3,
+    "match4Gain": 6,
+    "match5Gain": 10,
+    "cascadeBonus": 2
+  },
+  "powerUps": [
+    {
+      "id": "microphone_blast",
+      "createdBy": "match4",
+      "effect": "clear_row_or_column"
+    }
+  ],
+  "theme": {
+    "venue": "High School Talent Contest",
+    "stageMood": "first_performance",
+    "crowdSize": "small_but_excited"
+  }
+}

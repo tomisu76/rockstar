@@ -1,0 +1,26 @@
+{
+  "name": "rockstar-match3",
+  "version": "0.1.0",
+  "description": "Rockstar match-3 puzzle game – vertical slice prototype",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:report": "playwright show-report",
+    "test:unit": "vitest run",
+    "test:all": "npx tsc --noEmit && npm run build && npm run test:unit && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vitest": "^4.1.9"
+  },
+  "dependencies": {
+    "phaser": "^3.80.1"
+  }
+}

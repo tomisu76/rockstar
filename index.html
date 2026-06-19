@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="Rockstar – mobile match-3 puzzle game. Swap tiles, build crowd energy, and complete the concert!" />
+  <title>Rockstar – Match 3</title>
+  
+  <!-- PWA & Mobile Hardening Metadata -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0a0014" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="assets/icon.svg" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #0a0014;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    canvas { display: block; }
+    /* Hidden state bridge – readable by Playwright, invisible to users */
+    #rockstar-state { display: none; }
+  </style>
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          if (registrations.length > 0) {
+            for (const registration of registrations) {
+              registration.unregister();
+            }
+            if (window.caches) {
+              caches.keys().then(names => {
+                return Promise.all(names.map(name => caches.delete(name)));
+              }).then(() => {
+                console.log('Unregistered active service worker and cleared cache on localhost');
+                window.location.reload();
+              });
+            } else {
+              window.location.reload();
+            }
+          }
+        });
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('ServiceWorker registered successfully:', reg.scope))
+            .catch(err => console.error('ServiceWorker registration failed:', err));
+        });
+      }
+    }
+  </script>
+</head>
+<body>
+  <!--
+    State bridge for automated testing.
+    GameScene writes game state here via data-* attributes.
+    Playwright reads these attributes without touching the canvas.
+  -->
+  <div
+    id="rockstar-state"
+    data-testid="game-state"
+    aria-hidden="true"
+    data-app-version="v1.0-demo"
+    data-loaded="false"
+    data-current-scene="BootScene"
+    data-highest-unlocked-level="1"
+    data-completed-levels=""
+    data-selected-level="1"
+    data-selected-level-locked="false"
+    data-stars-earned="0"
+    data-best-score-current-level="0"
+    data-level-number="1"
+    data-game-state="booting"
+    data-moves-left="28"
+    data-moves-total="28"
+    data-objective-tile="gold_record"
+    data-objective-collected="0"
+    data-objective-target="10"
+    data-crowd-energy="0"
+    data-overlay-visible="false"
+    data-overlay-type=""
+    data-test-mode="false"
+    data-error=""
+    data-last-powerup-created=""
+    data-last-powerup-activated=""
+    data-last-combo-count="0"
+    data-last-clear-count="0"
+    data-score="0"
+    data-score-target="0"
+    data-obstacles-cleared="0"
+    data-obstacles-target="0"
+    data-last-obstacle-cleared=""
+    data-active-obstacle-count="0"
+    data-total-matches="0"
+    data-total-powerups-used="0"
+    data-total-obstacles-cleared="0"
+    data-final-score="0"
+    data-final-stars="0"
+    data-level-result=""
+  ></div>
+
+  <div id="game-container" data-testid="game-container"></div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

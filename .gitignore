@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.local
+toy/node_modules/
+
+# Playwright
+playwright-report/
+test-results/
