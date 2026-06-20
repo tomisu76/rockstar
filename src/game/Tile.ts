@@ -4,6 +4,17 @@ import { TileType, TILE_DEFS } from '../config/TileDefs';
 export const TILE_SIZE = 44;
 export const TILE_GAP  = 2;
 
+export const WOW_TILE_TEXTURES: Record<string, string> = {
+  gold_record: 'wow-gold-record',
+  silver_record: 'wow-silver-record',
+  music_note: 'wow-music-note',
+  spotlight: 'wow-spotlight',
+  speaker: 'wow-speaker',
+  microphone_blast: 'wow-microphone-blast',
+  spotlight_burst: 'wow-spotlight-burst',
+  stage_explosion: 'wow-stage-explosion'
+};
+
 /** A single board tile – a Phaser Container with a shape + icon text. */
 export class Tile extends Phaser.GameObjects.Container {
   tileType: TileType;
@@ -48,7 +59,12 @@ export class Tile extends Phaser.GameObjects.Container {
     this.drawBackground(def.color);
     this.add(this.bg);
 
-    if (scene.textures.exists(this.tileType)) {
+    const wowKey = WOW_TILE_TEXTURES[this.tileType];
+    if (wowKey && scene.textures.exists(wowKey)) {
+      this.sprite = scene.add.image(0, 0, wowKey);
+      this.sprite.setDisplaySize(TILE_SIZE * 0.8, TILE_SIZE * 0.8);
+      this.add(this.sprite);
+    } else if (scene.textures.exists(this.tileType)) {
       this.sprite = scene.add.image(0, 0, this.tileType);
       this.sprite.setDisplaySize(TILE_SIZE * 0.8, TILE_SIZE * 0.8);
       this.add(this.sprite);
@@ -96,7 +112,12 @@ export class Tile extends Phaser.GameObjects.Container {
     this.drawBackground(def.color);
     this.add(this.bg);
 
-    if (this.scene.textures.exists(type)) {
+    const wowKey = WOW_TILE_TEXTURES[type];
+    if (wowKey && this.scene.textures.exists(wowKey)) {
+      this.sprite = this.scene.add.image(0, 0, wowKey);
+      this.sprite.setDisplaySize(TILE_SIZE * 0.8, TILE_SIZE * 0.8);
+      this.add(this.sprite);
+    } else if (this.scene.textures.exists(type)) {
       this.sprite = this.scene.add.image(0, 0, type);
       this.sprite.setDisplaySize(TILE_SIZE * 0.8, TILE_SIZE * 0.8);
       this.add(this.sprite);

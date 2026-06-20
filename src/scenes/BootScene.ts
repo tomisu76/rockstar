@@ -52,6 +52,19 @@ export class BootScene extends Phaser.Scene {
     this.load.svg('spotlight', 'assets/tiles/spotlight.svg');
     this.load.svg('speaker', 'assets/tiles/speaker.svg');
     this.load.svg('microphone_blast', 'assets/tiles/microphone_blast.svg');
+
+    // Load Rockstar Visual Wow Asset Pack v1 (SVG draft assets)
+    this.load.svg('wow-gold-record', 'assets/wow/tiles/gold_record_wow.svg');
+    this.load.svg('wow-silver-record', 'assets/wow/tiles/silver_record_wow.svg');
+    this.load.svg('wow-music-note', 'assets/wow/tiles/music_note_wow.svg');
+    this.load.svg('wow-spotlight', 'assets/wow/tiles/spotlight_wow.svg');
+    this.load.svg('wow-speaker', 'assets/wow/tiles/speaker_wow.svg');
+    this.load.svg('wow-microphone-blast', 'assets/wow/powerups/microphone_blast_wow.svg');
+    this.load.svg('wow-spotlight-burst', 'assets/wow/powerups/spotlight_burst_wow.svg');
+    this.load.svg('wow-stage-explosion', 'assets/wow/powerups/stage_explosion_wow.svg');
+    this.load.svg('wow-stage-header', 'assets/wow/stage/stage_header_concert_wow.svg');
+    this.load.svg('wow-crowd-strip', 'assets/wow/stage/crowd_strip_wow.svg');
+    this.load.svg('wow-neon-frame', 'assets/wow/ui/neon_frame_wow.svg');
   }
 
   create(): void {

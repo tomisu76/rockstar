@@ -75,6 +75,8 @@ export class GameScene extends Phaser.Scene {
   private speakers: Phaser.GameObjects.Text[] = [];
   private boardGlow!: Phaser.GameObjects.Graphics;
   private lastCrowdEnergy = 0;
+  private crowdStrip?: Phaser.GameObjects.Image;
+  private stageHeaderBg?: Phaser.GameObjects.Image;
 
   constructor() { super({ key: 'GameScene' }); }
 
@@ -331,20 +333,31 @@ export class GameScene extends Phaser.Scene {
       this.rays.fillStyle(0xffffff, 1);
       this.rays.fillTriangle(x, 0, x - 40, GAME_H, x + 40, GAME_H);
     }
+
+    // Interactive Wow Crowd Strip
+    if (this.textures.exists('wow-crowd-strip')) {
+      this.crowdStrip = this.add.image(GAME_W / 2, 800, 'wow-crowd-strip').setOrigin(0.5, 0.5).setDepth(2);
+      this.crowdStrip.setDisplaySize(GAME_W, 90);
+    }
   }
 
   private drawStageHeader(): void {
-    // Stage platform graphic
-    const stage = this.add.graphics().setDepth(1);
-    stage.fillStyle(0x1a0033, 1);
-    stage.fillRect(0, 0, GAME_W, 180);
-    stage.lineStyle(2, 0x9b59b6, 1);
-    stage.strokeRect(0, 0, GAME_W, 180);
+    if (this.textures.exists('wow-stage-header')) {
+      this.stageHeaderBg = this.add.image(GAME_W / 2, 90, 'wow-stage-header').setOrigin(0.5).setDepth(1);
+      this.stageHeaderBg.setDisplaySize(GAME_W, 180);
+    } else {
+      // Stage platform graphic fallback
+      const stage = this.add.graphics().setDepth(1);
+      stage.fillStyle(0x1a0033, 1);
+      stage.fillRect(0, 0, GAME_W, 180);
+      stage.lineStyle(2, 0x9b59b6, 1);
+      stage.strokeRect(0, 0, GAME_W, 180);
 
-    // Neon accent line
-    const neon = this.add.graphics().setDepth(1);
-    neon.lineStyle(3, 0xff2d78, 0.9);
-    neon.strokeRect(4, 4, GAME_W - 8, 172);
+      // Neon accent line fallback
+      const neon = this.add.graphics().setDepth(1);
+      neon.lineStyle(3, 0xff2d78, 0.9);
+      neon.strokeRect(4, 4, GAME_W - 8, 172);
+    }
 
     // Stage lights row
     this.stageLights = [];
@@ -478,6 +491,11 @@ export class GameScene extends Phaser.Scene {
     // Stage metallic outer truss border
     frame.lineStyle(3, 0x2e004f, 1);
     frame.strokeRoundedRect(bx, by, bw, bh, 12);
+
+    if (this.textures.exists('wow-neon-frame')) {
+      const neonFrame = this.add.image(GAME_W / 2, by + bh / 2, 'wow-neon-frame').setOrigin(0.5).setDepth(6);
+      neonFrame.setDisplaySize(bw + 16, bh + 16);
+    }
 
     // Neon glowing hot-pink inner border
     frame.lineStyle(1.5, 0xff2d78, 0.9);
@@ -632,6 +650,42 @@ export class GameScene extends Phaser.Scene {
     }
   }
 
+  private pulseStageAndCrowd(): void {
+    if (this.crowdStrip) {
+      this.tweens.add({
+        targets: this.crowdStrip,
+        scaleY: 1.15,
+        scaleX: 1.05,
+        duration: 150,
+        yoyo: true,
+        ease: 'Quad.easeOut'
+      });
+    }
+
+    // Flash stage lights
+    this.stageLights.forEach((lamp) => {
+      this.tweens.add({
+        targets: lamp,
+        alpha: { from: 0.9, to: 0.2 },
+        duration: 120,
+        yoyo: true,
+        repeat: 1,
+        ease: 'Quad.easeOut'
+      });
+    });
+
+    // Also pulse speakers!
+    this.speakers.forEach(speaker => {
+      this.tweens.add({
+        targets: speaker,
+        scale: 1.4,
+        duration: 100,
+        yoyo: true,
+        ease: 'Bounce.easeOut'
+      });
+    });
+  }
+
   // ── Energy meter ──────────────────────────────────────────────────────────
   private drawEnergyMeter(): void {
     const my = BOARD_Y + CELL * 8 - TILE_GAP + 14;
@@ -757,6 +811,7 @@ export class GameScene extends Phaser.Scene {
     this.overlayType = 'win';
     this.crowdSys.fillOnWin();
     this.drawEnergyFill();
+    this.pulseStageAndCrowd();
 
     const energyVal = Math.round(this.crowdSys.getEnergy());
     const stars = StarsSystem.calculateStars(this.score, energyVal, this.movesLeft, this.currentLevel.starThresholds);
@@ -1230,6 +1285,7 @@ export class GameScene extends Phaser.Scene {
     let clearCount = 0;
 
     this.triggerVoxelPowerUpFX(result, activatedType);
+    this.pulseStageAndCrowd();
 
     for (const { row, col } of result.clearedCells) {
       const visual = this.tiles[row][col];
@@ -1603,6 +1659,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     // Trigger visual-only spotlight and board border neon pulses
+    this.pulseStageAndCrowd();
     if (this.rays) {
       this.tweens.add({
         targets: this.rays,
